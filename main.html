@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X PPLG 2 KEL 6 - Latihan Dengan Quiz</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables - Deep Ocean Palette */
+        :root {
+            --bg-color: #0f1419;
+            --card-bg: #192028;
+            --accent-color: #4a9a8e;
+            --accent-hover: #3b7d73;
+            --text-main: #a8b2c1;
+            --text-light: #e2e8f0;
+            --border-color: #2a3644;
+            --success: #2e7d32;
+            --danger: #c62828;
+            --warning: #f57c00;
+            --info: #1976d2;
+            --font-family: 'Outfit', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Typography & Utilities */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #b71c1c;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(15, 20, 25, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 400;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Section */
+        #stats {
+            padding: 4rem 0;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Features Section */
+        #features {
+            padding: 5rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Portal (Login & Dashboard) Section */
+        #portal {
+            padding: 5rem 0;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .portal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .portal-header {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .portal-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .portal-tab.active {
+            background-color: var(--border-color);
+            color: var(--accent-color);
+        }
+
+        .portal-content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .portal-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: var(--font-family);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(74, 154, 142, 0.2);
+        }
+
+        .file-upload-wrapper {
+            border: 2px dashed var(--border-color);
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-upload-wrapper:hover {
+            border-color: var(--accent-color);
+        }
+
+        .file-upload-wrapper input {
+            display: none;
+        }
+
+        /* Image Preview */
+        .image-preview-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .image-preview-container img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        /* Dashboard Layouts */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        table th, table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        table th {
+            background-color: rgba(74, 154, 142, 0.1);
+            color: var(--accent-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--card-bg);
+            z-index: 10;
+        }
+
+        .report-item {
+            background-color: var(--bg-color);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        /* FAQ Section */
+        #faq {
+            padding: 5rem 0;
+        }
+
+        .faq-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-family: var(--font-family);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Back to Top */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            border: none;
+            cursor: pointer;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-5px);
+        }
+
+        /* Notifications / Toast */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--success);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2000;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        #toast.error {
+            background-color: var(--danger);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border-color);
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">
+                Laporan & Absen <span>PPLG 2</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#portal">Portal Absensi & Lapor</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <canvas id="particle-canvas"></canvas>
+        <div class="hero-content fade-in">
+            <h1>Selamat Datang di <br><span>X PPLG 2 KEL 6</span></h1>
+            <p>Latihan Dengan Quiz. Platform terintegrasi untuk memudahkan absensi mandiri dan pelaporan fasilitas sekolah secara cepat dan transparan.</p>
+            <a href="#portal" class="btn">Mulai Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats">
+        <div class="container stats-grid fade-in">
+            <div class="stat-item">
+                <h3 class="counter" data-target="35">0</h3>
+                <p>Total Siswa</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="98">0</h3>
+                <p>Persentase Kehadiran</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="12">0</h3>
+                <p>Laporan Fasilitas</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="100">0</h3>
+                <p>Kepuasan Siswa (%)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Fitur Unggulan</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📝</div>
+                    <h3>Sistem Absensi Siswa</h3>
+                    <p>Presensi per kelas dengan rekapitulasi kehadiran yang cepat. Guru dapat memantau laporan siswa yang sering absen secara real-time tanpa perlu manual.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📍</div>
+                    <h3>Absensi Mandiri Siswa</h3>
+                    <p>Siswa dapat mengajukan absensi secara mandiri. Dilengkapi dengan deteksi lokasi (GPS) SMK N 11 Semarang / SMK Grafika dan permintaan unggah foto selfie.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Pelaporan Fasilitas</h3>
+                    <p>Formulir pelaporan kerusakan fasilitas sekolah (lampu, kursi, saluran air) lengkap dengan unggah foto, status tindak lanjut, dan rekap laporan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portal Section (Login & Dashboard) -->
+    <section id="portal">
+        <div class="container">
+            <h2 class="section-title fade-in">Portal Terpadu</h2>
+            
+            <div class="portal-container fade-in">
+                <!-- Tabs for Login Type -->
+                <div class="portal-header" id="login-tabs" style="display: flex;">
+                    <button class="portal-tab active" data-target="login-siswa">Login Siswa/Siswi</button>
+                    <button class="portal-tab" data-target="login-guru">Login Guru/Admin</button>
+                </div>
+
+                <!-- Login Siswa -->
+                <div class="portal-content active" id="login-siswa" style="display: block;">
+                    <form id="form-login-siswa">
+                        <div class="form-group">
+                            <label for="nis-siswa">NISN</label>
+                            <input type="text" id="nis-siswa" class="form-control" placeholder="Masukkan NISN Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama-siswa">Nama Lengkap (Sesuai Tabel)</label>
+                            <input type="text" id="nama-siswa" class="form-control" placeholder="Cth: ACHMAD JANNATAN" required>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Masuk ke Dashboard Siswa</button>
+                    </form>
+                </div>
+
+                <!-- Login Guru -->
+                <div class="portal-content" id="login-guru">
+                    <form id="form-login-guru">
+                        <div class="form-group">
+                            <label for="username-guru">Username / NIP</label>
+                            <input type="text" id="username-guru" class="form-control" placeholder="Cth: AdminGuru" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-guru">Password</label>
+                            <input type="password" id="password-guru" class="form-control" placeholder="Cth: GuruPPLG2" required>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Masuk ke Dashboard Guru</button>
+                        <small style="display:block; margin-top:10px; font-size: 0.8rem; color: var(--text-main); text-align:center;">*Case-sensitive (Perhatikan huruf besar/kecil)</small>
+                    </form>
+                </div>
+
+                <!-- Dashboard Siswa (Tersembunyi awalnya) -->
+                <div class="portal-content" id="dashboard-siswa" style="display:none;">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--accent-color);" id="welcome-siswa">Dashboard Siswa</h3>
+                    <div class="dashboard-grid">
+                        <!-- Form Absensi -->
+                        <div class="dashboard-card">
+                            <h4>Absensi Kehadiran Hari Ini</h4>
+                            <form id="form-absensi">
+                                <div class="form-group">
+                                    <label>Status Kehadiran</label>
+                                    <select class="form-control" id="status-absensi" required>
+                                        <option value="Hadir">Hadir</option>
+                                        <option value="Sakit">Sakit</option>
+                                        <option value="Izin">Izin</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Lokasi Anda</label>
+                                    <button type="button" class="btn btn-outline" id="btn-location" style="width:100%; font-size: 0.9rem;">📍 Dapatkan Lokasi Sekolah</button>
+                                    <small id="location-status" style="display:block; margin-top:5px; color: var(--text-main);">Belum terdeteksi.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unggah Foto Selfie (Bukti)</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="foto-absensi" accept="image/*" required>
+                                        <label for="foto-absensi" style="cursor: pointer; display: block;">
+                                            <span style="font-size: 2rem;">📸</span><br>
+                                            Klik untuk mengambil/mengunggah foto
+                                        </label>
+                                    </div>
+                                    <div class="image-preview-container">
+                                        <img id="preview-absensi" alt="Preview Foto Absensi">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn" style="width: 100%;">Kirim Absensi</button>
+                            </form>
+                        </div>
+
+                        <!-- Form Lapor Fasilitas -->
+                        <div class="dashboard-card">
+                            <h4>Pelaporan Masalah Fasilitas</h4>
+                            <form id="form-fasilitas">
+                                <div class="form-group">
+                                    <label>Jenis Fasilitas</label>
+                                    <select class="form-control" id="jenis-fasilitas" required>
+                                        <option value="Lampu">Lampu</option>
+                                        <option value="Kursi">Kursi</option>
+                                        <option value="Saluran Air">Saluran Air</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Deskripsi Kerusakan</label>
+                                    <textarea class="form-control" id="deskripsi-fasilitas" rows="2" placeholder="Jelaskan detail kerusakan..." required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unggah Foto Kerusakan</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="foto-fasilitas" accept="image/*" required>
+                                        <label for="foto-fasilitas" style="cursor: pointer; display: block;">
+                                            <span style="font-size: 2rem;">📷</span><br>
+                                            Unggah foto fasilitas rusak
+                                        </label>
+                                    </div>
+                                    <div class="image-preview-container">
+                                        <img id="preview-fasilitas" alt="Preview Foto Fasilitas">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn" style="width: 100%;">Kirim Laporan</button>
+                            </form>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" id="btn-logout-siswa" style="margin-top: 2rem; width: 100%;">Logout</button>
+                </div>
+
+                <!-- Dashboard Guru (Tersembunyi awalnya) -->
+                <div class="portal-content" id="dashboard-guru" style="display:none;">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--accent-color);">Dashboard Guru/Admin</h3>
+                    
+                    <div class="dashboard-card" style="margin-bottom: 1rem;">
+                        <h4>Rekap Kehadiran Kelas X PPLG 2</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NISN</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Status Hari Ini</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabel-siswa">
+                                    <!-- Data akan di-render oleh JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4>Laporan Fasilitas Masuk</h4>
+                        <div id="list-laporan-fasilitas">
+                            <!-- Data laporan akan di-render di sini -->
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline" id="btn-logout-guru" style="margin-top: 2rem; width: 100%;">Logout</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title fade-in">Pertanyaan yang Sering Diajukan</h2>
+            <div class="faq-item fade-in">
+                <button class="faq-question">Bagaimana cara melakukan absensi mandiri?</button>
+                <div class="faq-answer">
+                    <p>Login menggunakan NISN dan Nama Lengkap Anda sesuai data sekolah. Masuk ke dashboard, klik "Dapatkan Lokasi" dan izinkan browser mengakses GPS, lalu unggah foto selfie sebagai bukti kehadiran.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">Apakah data absensi tersimpan permanen?</button>
+                <div class="faq-answer">
+                    <p>Ya, untuk versi demo ini data disimpan di LocalStorage browser Anda. Untuk penggunaan nyata secara luas di GitHub Pages, data perlu diintegrasikan dengan database Cloud seperti Firebase agar bisa diakses lintas perangkat.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">Mengapa Login Siswa Gagal?</button>
+                <div class="faq-answer">
+                    <p>Pastikan NISN dan Nama Lengkap Anda diketik dengan benar dan sama persis dengan yang terdaftar di tabel kelas (perhatikan spasi dan ejaan).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 X PPLG 2 KEL 6. Latihan Dengan Quiz. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">GitHub</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top">↑</button>
+
+    <!-- Toast Notification -->
+    <div id="toast">
+        <span id="toast-icon">✅</span>
+        <span id="toast-message">Sudah berhasil dikirimkan!</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDDS4FZTJ1kVRmOldCLUwbSKJf9wicSEog",
+            authDomain: "xpplg2absensi-laporanfasilitas.firebaseapp.com",
+            projectId: "xpplg2absensi-laporanfasilitas",
+            storageBucket: "xpplg2absensi-laporanfasilitas.firebasestorage.app",
+            messagingSenderId: "930739467685",
+            appId: "1:930739467685:web:a41684182317f14b9aa44c",
+            measurementId: "G-CDQW1J74VB"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // ==========================================
+        // 1. INISIALISASI DATA & LOCALSTORAGE
+        // ==========================================
+        
+        // Data Default Siswa (Jika belum ada di LocalStorage)
+        const defaultStudents = [
+            { no: 1, nama: "ACHMAD JANNATAN", nisn: "0103061324", status: "Belum Absen" },
+            { no: 2, nama: "ADELIA SAFANA REGINA PUTRI", nisn: "0104700483", status: "Belum Absen" },
+            { no: 3, nama: "ALLURA NAYA CALISTA", nisn: "0111203137", status: "Belum Absen" },
+            { no: 4, nama: "ALVINO ANINDYA GIBRAN", nisn: "0103070864", status: "Belum Absen" },
+            { no: 5, nama: "ARDIANSYAH DEVANO DWI SUNDOYO", nisn: "0114372642", status: "Belum Absen" },
+            { no: 6, nama: "ARYA ARTANTO WIBOWO", nisn: "0102445801", status: "Belum Absen" },
+            { no: 7, nama: "ASYAM MALIK MAULANA", nisn: "3112092934", status: "Belum Absen" },
+            { no: 8, nama: "BAGAS ADITYA", nisn: "0119092228", status: "Belum Absen" },
+            { no: 9, nama: "DAFFA ARSYAD PRATAMA", nisn: "0109705230", status: "Belum Absen" },
+            { no: 10, nama: "DARY ARFINO PUTRA PRADANA", nisn: "0117764985", status: "Belum Absen" },
+            { no: 11, nama: "DESVITA AJENG KURNIA", nisn: "0102485600", status: "Belum Absen" },
+            { no: 12, nama: "DWINA WIDYA PUTRI", nisn: "0108377173", status: "Belum Absen" },
+            { no: 13, nama: "ERICHO DAVINO PRAMANA", nisn: "0103938507", status: "Belum Absen" },
+            { no: 14, nama: "FAIZ NURVIANO PUTRA NUGROHO", nisn: "0102968868", status: "Belum Absen" },
+            { no: 15, nama: "FARID ADAM", nisn: "0101466898", status: "Belum Absen" },
+            { no: 16, nama: "GIBRAN PUTRA YUDIANSYAH", nisn: "0119726689", status: "Belum Absen" },
+            { no: 17, nama: "HELGA AYSAR HULAIF YUSTIYA", nisn: "0106988916", status: "Belum Absen" },
+            { no: 18, nama: "JAUZA ALYA", nisn: "0114251852", status: "Belum Absen" },
+            { no: 19, nama: "JIHAN NAILA JAZILA HUSEIN", nisn: "0114007937", status: "Belum Absen" },
+            { no: 20, nama: "JOVAN ADITYA KURNIAWAN", nisn: "0129012698", status: "Belum Absen" },
+            { no: 21, nama: "KYO HARSYANAGI", nisn: "0111417537", status: "Belum Absen" },
+            { no: 22, nama: "MAULANA MUCHAMAD MUCHSIN", nisn: "0116624224", status: "Belum Absen" },
+            { no: 23, nama: "MUHAMAD DIAN SAPUTRA", nisn: "0104548433", status: "Belum Absen" },
+            { no: 24, nama: "MUHAMMAD RAFA ADEMI PUTRA RAMADHAN", nisn: "3092868704", status: "Belum Absen" },
+            { no: 25, nama: "MUHAMMAD YAHYA", nisn: "0119991845", status: "Belum Absen" },
+            { no: 26, nama: "NAJWA CANTIKA KIRANA", nisn: "0102793509", status: "Belum Absen" },
+            { no: 27, nama: "RADHITYA AYDIN RAFIF", nisn: "0101061567", status: "Belum Absen" },
+            { no: 28, nama: "RAFA GIBRAN AKBAR", nisn: "0115743208", status: "Belum Absen" },
+            { no: 29, nama: "RAHARDIAN ENGGAR HANDIKA", nisn: "#N/A", status: "Belum Absen" },
+            { no: 30, nama: "SAIFUL RAMADZAN", nisn: "0105261208", status: "Belum Absen" },
+            { no: 31, nama: "SHEVA MAHESA PUTRA", nisn: "0118898336", status: "Belum Absen" },
+            { no: 32, nama: "TASYA JIHAN SABIRA", nisn: "0118841684", status: "Belum Absen" },
+            { no: 33, nama: "TIDAR ADI PANGESTU", nisn: "0106487904", status: "Belum Absen" },
+            { no: 34, nama: "WAHYU ADITYA SAPUTRA", nisn: "0118562017", status: "Belum Absen" },
+            { no: 35, nama: "YUDATAMA TUNGGAL CAHYA", nisn: "0107818996", status: "Belum Absen" }
+        ];
+
+        // Ambil data dari LocalStorage atau gunakan default
+        let studentsData = JSON.parse(localStorage.getItem('studentsData_xpplg2')) || defaultStudents;
+        let reportsData = JSON.parse(localStorage.getItem('reportsData_xpplg2')) || [];
+
+        // Fungsi untuk menyimpan ke LocalStorage
+        function saveStudents() {
+            localStorage.setItem('studentsData_xpplg2', JSON.stringify(studentsData));
+        }
+        function saveReports() {
+            localStorage.setItem('reportsData_xpplg2', JSON.stringify(reportsData));
+        }
+
+        let currentStudent = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Navigation Hamburger ---
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => navLinks.classList.remove('active'));
+            });
+
+            // --- Scroll Animations ---
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+
+            // --- Stats Counter ---
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200; 
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        const updateCount = () => {
+                            const count = +counter.innerText;
+                            const inc = target / speed;
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + inc);
+                                setTimeout(updateCount, 20);
+                            } else counter.innerText = target;
+                        };
+                        updateCount();
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(counter => counterObserver.observe(counter));
+
+            // --- FAQ Accordion ---
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const parent = question.parentElement;
+                    const answer = question.nextElementSibling;
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (item !== parent) {
+                            item.classList.remove('active');
+                            item.querySelector('.faq-answer').style.maxHeight = null;
+                        }
+                    });
+                    parent.classList.toggle('active');
+                    answer.style.maxHeight = parent.classList.contains('active') ? answer.scrollHeight + "px" : null;
+                });
+            });
+
+            // --- Back to Top ---
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                backToTopBtn.classList.toggle('show', window.scrollY > 300);
+            });
+            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // --- Toast Notification ---
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            function showToast(message, isError = false) {
+                toastMessage.innerText = message;
+                toast.classList.toggle('error', isError);
+                document.getElementById('toast-icon').innerText = isError ? '❌' : '✅';
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3500);
+            }
+
+            // --- Portal Logic ---
+            const tabs = document.querySelectorAll('.portal-tab');
+            const loginTabs = document.getElementById('login-tabs');
+            const loginSiswa = document.getElementById('login-siswa');
+            const loginGuru = document.getElementById('login-guru');
+            const dashboardSiswa = document.getElementById('dashboard-siswa');
+            const dashboardGuru = document.getElementById('dashboard-guru');
+            const welcomeSiswa = document.getElementById('welcome-siswa');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    loginSiswa.style.display = 'none';
+                    loginGuru.style.display = 'none';
+                    document.getElementById(tab.getAttribute('data-target')).style.display = 'block';
+                });
+            });
+
+            // LOGIN SISWA
+            document.getElementById('form-login-siswa').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const inputNisn = document.getElementById('nis-siswa').value.trim();
+                const inputNama = document.getElementById('nama-siswa').value.trim().toUpperCase();
+
+                const student = studentsData.find(s => s.nisn === inputNisn && s.nama.toUpperCase() === inputNama);
+
+                if (student) {
+                    currentStudent = student;
+                    loginTabs.style.display = 'none';
+                    loginSiswa.style.display = 'none';
+                    loginGuru.style.display = 'none';
+                    dashboardSiswa.style.display = 'block';
+                    welcomeSiswa.innerText = `Selamat Datang, ${student.nama}`;
+                    showToast(`Login berhasil! Halo ${student.nama}.`);
+                    document.getElementById('form-login-siswa').reset();
+                } else {
+                    showToast('NISN atau Nama tidak cocok dengan data sekolah!', true);
+                }
+            });
+
+            // LOGIN GURU (Case-Sensitive)
+            document.getElementById('form-login-guru').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const user = document.getElementById('username-guru').value;
+                const pass = document.getElementById('password-guru').value;
+
+                if (user === "AdminGuru" && pass === "GuruPPLG2") {
+                    loginTabs.style.display = 'none';
+                    loginSiswa.style.display = 'none';
+                    loginGuru.style.display = 'none';
+                    dashboardGuru.style.display = 'block';
+                    showToast('Login Guru/Admin Berhasil!');
+                    renderAdminDashboard(); 
+                    document.getElementById('form-login-guru').reset();
+                } else {
+                    showToast('Username/Password Salah (Perhatikan huruf besar/kecil)!', true);
+                }
+            });
+
+            // LOGOUT
+            document.getElementById('btn-logout-siswa').addEventListener('click', () => {
+                currentStudent = null;
+                dashboardSiswa.style.display = 'none';
+                loginTabs.style.display = 'flex';
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('.portal-tab[data-target="login-siswa"]').classList.add('active');
+                loginSiswa.style.display = 'block';
+                loginGuru.style.display = 'none';
+                document.getElementById('form-login-siswa').reset();
+                document.getElementById('form-absensi').reset();
+                document.getElementById('preview-absensi').style.display = 'none';
+                document.getElementById('location-status').innerText = "Belum terdeteksi.";
+            });
+
+            document.getElementById('btn-logout-guru').addEventListener('click', () => {
+                dashboardGuru.style.display = 'none';
+                loginTabs.style.display = 'flex';
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('.portal-tab[data-target="login-guru"]').classList.add('active');
+                loginSiswa.style.display = 'none';
+                loginGuru.style.display = 'block';
+                document.getElementById('form-login-guru').reset();
+            });
+
+            // --- FUNGSI RENDER DASHBOARD ADMIN ---
+            function renderAdminDashboardRealtime() {
+                // 1. Dengarkan perubahan pada koleksi "absensi"
+                const qAbsensi = query(collection(db, "absensi"), orderBy("timestamp", "desc"));
+                onSnapshot(qAbsensi, (snapshot) => {
+                    const tbody = document.getElementById('tabel-siswa');
+                    tbody.innerHTML = '';
+                    
+                    // Gabungkan data absensi terbaru dengan data master siswa
+                    // (Contoh sederhana: tampilkan langsung data dari Firestore)
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        let statusColor = data.status === 'Hadir' ? 'var(--success)' : 
+                                        data.status === 'Sakit' ? 'var(--warning)' : 'var(--info)';
+                        
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>-</td> <!-- NISN bisa disesuaikan -->
+                            <td>${data.nisn || '-'}</td>
+                            <td>${data.nama}</td>
+                            <td><span style="color: ${statusColor}; font-weight: 600;">${data.status}</span></td>
+                            <td><button class="btn btn-danger btn-hapus" data-id="${doc.id}" style="padding: 5px 10px; font-size: 0.8rem;">Reset</button></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                });
+
+                // 2. Dengarkan perubahan pada koleksi "laporan_fasilitas"
+                const qLaporan = query(collection(db, "laporan_fasilitas"), orderBy("timestamp", "desc"));
+                onSnapshot(qLaporan, (snapshot) => {
+                    const listLaporan = document.getElementById('list-laporan-fasilitas');
+                    listLaporan.innerHTML = '';
+                    
+                    if (snapshot.empty) {
+                        listLaporan.innerHTML = '<p style="font-size: 0.9rem; color: var(--text-main);">Belum ada laporan fasilitas yang masuk.</p>';
+                        return;
+                    }
+
+                    snapshot.forEach((doc) => {
+                        const report = doc.data();
+                        const div = document.createElement('div');
+                        div.className = 'report-item';
+                        div.innerHTML = `
+                            <p style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 5px;">
+                                <strong>${report.nama}</strong> - ${report.timestamp ? new Date(report.timestamp.seconds * 1000).toLocaleDateString() : '-'}
+                            </p>
+                            <p style="font-size: 0.9rem; color: var(--text-light);">
+                                [${report.jenis}] ${report.deskripsi}
+                            </p>
+                            <span style="font-size: 0.75rem; color: var(--warning); display:block; margin-top:5px;">Status: ${report.status}</span>
+                        `;
+                        listLaporan.appendChild(div);
+                    });
+                });
+            }
+
+            // --- Fitur Preview Foto ---
+            function setupImagePreview(inputId, previewId) {
+                const input = document.getElementById(inputId);
+                const preview = document.getElementById(previewId);
+                input.addEventListener('change', function() {
+                    const file = this.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            preview.src = e.target.result;
+                            preview.style.display = 'block';
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.src = '';
+                        preview.style.display = 'none';
+                    }
+                });
+            }
+            setupImagePreview('foto-absensi', 'preview-absensi');
+            setupImagePreview('foto-fasilitas', 'preview-fasilitas');
+
+            // --- Geolocation API ---
+            const btnLocation = document.getElementById('btn-location');
+            const locationStatus = document.getElementById('location-status');
+
+            btnLocation.addEventListener('click', () => {
+                locationStatus.innerText = "Meminta izin lokasi...";
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            locationStatus.innerHTML = `<span style="color: var(--success);">Terdeteksi di area SMK N 11 Semarang (Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)})</span>`;
+                            showToast('Lokasi berhasil didapatkan!');
+                        },
+                        (error) => {
+                            locationStatus.innerHTML = `<span style="color: var(--warning);">Izin ditolak. (Simulasi: Terdeteksi di Area SMK N 11)</span>`;
+                            showToast('Gagal mendapatkan lokasi asli. Menggunakan simulasi.', true);
+                        },
+                        { enableHighAccuracy: true }
+                    );
+                } else {
+                    locationStatus.innerText = "Geolocation tidak didukung browser ini.";
+                }
+            });
+
+            // --- FORM ABSENSI SUBMISSION ---
+            document.getElementById('form-absensi').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!currentStudent) return showToast('Sesi login berakhir, silakan login ulang.', true);
+
+                const statusAbsen = document.getElementById('status-absensi').value;
+
+                try {
+                    // Kirim data ke koleksi "absensi" di Firestore
+                    await addDoc(collection(db, "absensi"), {
+                        nisn: currentStudent.nisn,
+                        nama: currentStudent.nama,
+                        status: statusAbsen,
+                        timestamp: new Date() // Waktu server
+                    });
+
+                    showToast(`Absensi ${statusAbsen} Sudah berhasil dikirimkan!`);
+                    document.getElementById('form-absensi').reset();
+                    document.getElementById('preview-absensi').style.display = 'none';
+                    document.getElementById('location-status').innerText = "Belum terdeteksi.";
+                } catch (error) {
+                    console.error("Error menulis dokumen: ", error);
+                    showToast('Gagal mengirim absensi. Coba lagi.', true);
+                }
+            });
+
+            // --- FORM LAPORAN FASILITAS SUBMISSION ---
+            document.getElementById('form-fasilitas').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!currentStudent) return showToast('Sesi login berakhir, silakan login ulang.', true);
+
+                const jenis = document.getElementById('jenis-fasilitas').value;
+                const deskripsi = document.getElementById('deskripsi-fasilitas').value;
+
+                try {
+                    await addDoc(collection(db, "laporan_fasilitas"), {
+                        nama: currentStudent.nama,
+                        jenis: jenis,
+                        deskripsi: deskripsi,
+                        status: 'Diproses',
+                        timestamp: new Date()
+                    });
+
+                    showToast('Laporan Fasilitas Sudah berhasil dikirimkan!');
+                    document.getElementById('form-fasilitas').reset();
+                    document.getElementById('preview-fasilitas').style.display = 'none';
+                } catch (error) {
+                    console.error("Error menulis laporan: ", error);
+                    showToast('Gagal mengirim laporan. Coba lagi.', true);
+                }
+            });
+
+            // --- Animated Particle Canvas Background ---
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                init();
+            });
+
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY;
+                    this.size = size; this.color = color;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                    this.x += this.directionX; this.y += this.directionY;
+                    this.draw();
+                }
+            }
+
+            function init() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 15000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * 0.4) - 0.2;
+                    let directionY = (Math.random() * 0.4) - 0.2;
+                    let color = 'rgba(74, 154, 142, 0.3)';
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            function connect() {
+                let opacityValue = 1;
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                        + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < (canvas.width / 10) * (canvas.height / 10)) {
+                            opacityValue = 1 - (distance / 20000);
+                            ctx.strokeStyle = `rgba(74, 154, 142, ${opacityValue * 0.2})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+                connect();
+            }
+
+            init();
+            animate();
+        });
+    </script>
+</body>
+</html>
